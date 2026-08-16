@@ -21,6 +21,8 @@ PROVIDER = "deepseek"  # "deepseek" 或 "claude"
 API_KEY = os.environ.get("WHY_SKILL_API_KEY", "") or "sk-221b3407d1a34a02ac7562b927cc086c"
 # 默认 flash（快、省）；可切 deepseek-v4-pro / deepseek-reasoner（深度推理，出 reasoning_content）
 MODEL_ID = os.environ.get("WHY_SKILL_MODEL", "deepseek-v4-flash")
+# OpenAI 兼容接口地址；换服务商时改这里（如 OpenAI: https://api.openai.com/v1）
+BASE_URL = os.environ.get("WHY_SKILL_BASE_URL", "https://api.deepseek.com")
 MAX_TOKENS = int(os.environ.get("WHY_SKILL_MAX_TOKENS", "32768"))  # 输出上限拉到 API 最高（DS 便宜，防止思考吞掉正文）
 # v1 先关闭质检（避免"1 个模糊词就 FAIL"误报干扰验收），规则定稿后按版块标题重写
 CHECK_QUALITY = False
@@ -108,7 +110,7 @@ class WhyAuditor:
             )
             self.client = OpenAI(
                 api_key=API_KEY,
-                base_url="https://api.deepseek.com",
+                base_url=BASE_URL,
                 http_client=http_client
             )
             self.model_id = MODEL_ID

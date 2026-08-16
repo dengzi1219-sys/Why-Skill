@@ -61,8 +61,11 @@ SYSTEM_SHORT = (
 # ==========================================
 # API 客户端
 # ==========================================
-def make_client(api_key: str, proxy: str = ""):
-    kwargs = {"api_key": api_key, "base_url": "https://api.deepseek.com"}
+def make_client(api_key: str, base_url: str = "", proxy: str = ""):
+    kwargs = {
+        "api_key": api_key,
+        "base_url": base_url.strip() or "https://api.deepseek.com",
+    }
     if proxy and proxy.strip():
         kwargs["http_client"] = httpx.Client(
             proxy=proxy.strip(), timeout=httpx.Timeout(600.0, connect=10.0)
@@ -202,15 +205,25 @@ st.set_page_config(page_title="Why-Skill · 归因审计", page_icon="🕵️", 
 with st.sidebar:
     st.header("⚙️ 配置")
     api_key = st.text_input(
-        "DeepSeek API Key",
+        "API Key",
         type="password",
-        help="platform.deepseek.com 注册获取",
+        help="DeepSeek 在 platform.deepseek.com 获取；其他 OpenAI 兼容服务商用各自的 Key",
+    )
+    base_url = st.text_input(
+        "API 地址（Base URL）",
+        value="https://api.deepseek.com",
+        help="OpenAI 兼容接口地址。换服务商改这里，如 OpenAI: https://api.openai.com/v1",
     )
     model = st.selectbox(
         "模型",
-        ["deepseek-v4-flash", "deepseek-v4-pro"],
-        help="flash 快省；pro 推理更深（思考更长，需靠成文轮兜底）",
+        ["deepseek-v4-flash", "deepseek-v4-pro", "自定义"],
+        help="DeepSeek 预设；选「自定义」可填任意 OpenAI 兼容模型名",
     )
+    if model == "自定义":
+        model = st.text_input(
+            "自定义模型名",
+            placeholder="如 gpt-4o / kimi-k2 / qwen-max",
+        )
     proxy = st.text_input(
         "代理地址（可选）",
         placeholder="http://127.0.0.1:7890",
@@ -292,7 +305,7 @@ elif stage == "probe":
         thinking_ph = st.empty()
         content_ph = st.empty()
         try:
-            client = make_client(api_key, proxy)
+            client = make_client(api_key, base_url, proxy)
             question = st.session_state.question
             user_msg = f"事件描述：\n{st.session_state.corpus}\n"
             if question and question.strip():
@@ -367,7 +380,7 @@ elif stage == "report":
         thinking_ph = st.empty()
         content_ph = st.empty()
         try:
-            client = make_client(api_key, proxy)
+            client = make_client(api_key, base_url, proxy)
             question = st.session_state.question
             event_msg = f"事件描述：\n{st.session_state.corpus}\n"
             if question and question.strip():

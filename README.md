@@ -59,6 +59,28 @@ python web/app.py   # 自动拉起 Streamlit，无需手动输入 streamlit run
 
 自带 key 模式：API Key 只存于浏览器会话内存，不落盘、不上传。
 
+## 通用模型支持（OpenAI 兼容）
+
+两个版本都支持任意 **OpenAI 兼容**服务商（DeepSeek / OpenAI / Kimi / 通义千问 / GLM 等），只需配置三项：
+
+- **API Key**：对应服务商的 Key
+- **Base URL**：服务商的 OpenAI 兼容端点
+  - DeepSeek：`https://api.deepseek.com`
+  - OpenAI：`https://api.openai.com/v1`
+- **模型名**：该服务商下的具体模型名
+
+### CLI
+
+```powershell
+$env:WHY_SKILL_API_KEY   = "sk-..."
+$env:WHY_SKILL_BASE_URL  = "https://api.deepseek.com"   # 可选，默认 DeepSeek
+$env:WHY_SKILL_MODEL     = "deepseek-v4-flash"          # 可选，默认 flash
+```
+
+### 网页版
+
+侧边栏直接填写：API Key、API 地址（Base URL）、模型（DeepSeek 预设或「自定义」任意 OpenAI 兼容模型名）。
+
 ## 免责声明
 
 - 本工具输出为概率推演，不构成法律或医疗建议
