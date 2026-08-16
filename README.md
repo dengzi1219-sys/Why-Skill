@@ -68,3 +68,5 @@ python web/app.py   # 自动拉起 Streamlit，无需手动输入 streamlit run
 ## License
 
 MIT
+
+网页链接 https://why-skill-hlsmcpe4jgfrfra6f9peeg.streamlit.app/ 无需下载。点开即用，不收集聊天记录与api key
