@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "why-skill"
+version = "3.0.5"
+description = "Why-Skill V3.0.5 首席审计官专属归因引擎"
+dependencies = [
+    "anthropic",
+    "openai",
+]
+
+[project.scripts]
+why = "why_skill.main:main"
