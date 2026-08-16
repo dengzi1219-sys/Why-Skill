@@ -217,9 +217,8 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# why-skill 本地产物（测试数据/报告/备份）
+# why-skill 本地产物（测试数据/报告/备份；cases/ 保留脱敏案例可跟踪）
 reports/
-cases/
 测试*
 备份/
 .history/
