@@ -81,6 +81,15 @@ $env:WHY_SKILL_MODEL     = "deepseek-v4-flash"          # 可选，默认 flash
 
 侧边栏直接填写：API Key、API 地址（Base URL）、模型（DeepSeek 预设或「自定义」任意 OpenAI 兼容模型名）。
 
+## 案件工作台（推荐入口）
+
+`workbench/` 把一次分析变成**可持久化的案件**：探针待办勾选、查证状态进报告、多轮闭环、导出/导入断点续跑。
+
+- **在线体验版**（streamlit.app）：无需安装、打开即用；但**无本地存档**——刷新/休眠后案件不保留，请用「导出 / 导入 JSON」续跑，报告记得下载。
+- **本地版**：`python workbench/app.py`，案件存自己电脑（`workbench/saves/cases/`），关浏览器、隔几天回来都还在，适合长期跟进一件事。
+
+使用攻略见 [workbench/guide.md](workbench/guide.md)，侧边栏「📖 使用攻略」可直接展示/编辑。
+
 ## 免责声明
 
 - 本工具输出为概率推演，不构成法律或医疗建议

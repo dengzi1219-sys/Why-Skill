@@ -222,3 +222,7 @@ reports/
 测试*
 备份/
 .history/
+
+# workbench 本地数据/自测
+workbench/saves/
+workbench/selftest.py
